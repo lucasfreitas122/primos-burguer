@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  /* Base */
+  --color-ink: #070707;
+
+  /* Marca: vermelho + bege (dourado só para o gradiente de destaque) */
+  --color-red: #c6382e;
+  --color-red-2: #9c241c;
+  --color-gold: #d9a35f;
+  --color-gold-2: #c97a2b;
+  --color-beige: #e7d4b3;
+  --color-cream: #f4ecdd;
+  --color-muted: #bdbdbd;
+
+  /* Tipografia */
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: var(--color-ink);
+}
+
+body {
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Cursor customizado (apenas em telas com ponteiro fino) */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+}
+
+::selection {
+  background: var(--color-red);
+  color: #fff;
+}
+
+/* Grão sutil premium */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Parallax fixo (desktop) */
+.parallax-fixed {
+  background-attachment: fixed;
+}
+@media (max-width: 1000px) {
+  .parallax-fixed {
+    background-attachment: scroll;
+  }
+}
+
+/* Linha pontilhada item -> preço no modal */
+.leader {
+  flex: 1;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.22);
+  margin: 0 12px;
+  transform: translateY(-5px);
+}
+
+/* Masonry da galeria */
+.masonry {
+  column-count: 3;
+  column-gap: 16px;
+}
+.masonry > figure {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+@media (max-width: 1000px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+@media (max-width: 560px) {
+  .masonry {
+    column-count: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-fixed {
+    background-attachment: scroll;
+  }
+}
